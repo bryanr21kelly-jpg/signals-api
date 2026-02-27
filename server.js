@@ -19,11 +19,13 @@ app.get("/signal", async (req, res) => {
       tp: price * 1.03
     });
 
-  } catch (error) {
-    res.status(500).json({ error: "Error obteniendo datos" });
-  }
-
-});
+  catch (error) {
+  console.log("ERROR REAL:", error.message);
+  res.json({ 
+    error: "Error obteniendo datos",
+    detalle: error.message
+  });
+}
 
 const PORT = process.env.PORT || 3000;
 
