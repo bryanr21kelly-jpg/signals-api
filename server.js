@@ -11,7 +11,7 @@ app.get("/signal", async (req, res) => {
   try {
     // Obtener precio actual de BTC desde Binance
     const response = await axios.get(
-      "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"
+     "https://api.binance.us/api/v3/ticker/price?symbol=BTCUSDT"
     );
 
     const price = parseFloat(response.data.price);
