@@ -9,16 +9,16 @@ app.get("/", (req, res) => {
 
 app.get("/signal", async (req, res) => {
   try {
-    // Obtener precio actual de BTC desde Binance
+    const symbol = req.query.symbol || "BTCUSDT";
+
     const response = await axios.get(
-     "https://api.binance.us/api/v3/ticker/price?symbol=BTCUSDT"
+      `https://api.binance.us/api/v3/ticker/price?symbol=${symbol}`
     );
 
     const price = parseFloat(response.data.price);
 
-    // Lógica simple de ejemplo
     const signal = {
-      market: "BTCUSDT",
+      market: symbol,
       signal: "BUY",
       entry: price,
       sl: price * 0.98,
@@ -28,7 +28,6 @@ app.get("/signal", async (req, res) => {
     res.json(signal);
 
   } catch (error) {
-    console.log("ERROR REAL:", error.message);
     res.json({
       error: "Error obteniendo datos",
       detalle: error.message
